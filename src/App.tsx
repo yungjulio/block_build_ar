@@ -1,10 +1,10 @@
 import React from "react";
-import LegoScene from "./components/LegoScene";
+import BlocksScene from "./components/BlocksScene";
 
 const App: React.FC = () => {
   return (
     <div>
-      <LegoScene />
+      <BlocksScene />
     </div>
   );
 };

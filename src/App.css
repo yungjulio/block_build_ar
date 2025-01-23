@@ -10,29 +10,29 @@ canvas {
   display: block;
 }
 
-.lego-container {
+.blocks-container {
   display: flex;
   height: 100vh;
 }
 
-.lego-sidebar {
+.blocksList-sidebar {
   width: 200px;
   background-color: black;
   padding: 10px;
   box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
 }
 
-.lego-sidebar h3 {
+.blocksList-sidebar h3 {
   margin: 0 0 10px 0;
 }
 
-.lego-block-list {
+.blocksList {
   list-style-type: none;
   padding: 0;
   margin: 0;
 }
 
-.lego-block-item {
+.blocksList-item {
   display: flex;
   justify-content: center; 
   align-items: center;
@@ -44,16 +44,16 @@ canvas {
   transition: background-color 0.2s, border-color 0.2s;
 }
 
-.lego-block-item:hover {
+.blocksList-item:hover {
   background-color: #f9f9f9;
   border-color: #888;
 }
 
-.lego-block-item.selected {
+.blocksList-item.selected {
   background-color: #e6f7ff;
   border: 2px solid blue;
 }
 
-.lego-canvas {
+.blocks-canvas {
   flex: 1;
 }

@@ -3,7 +3,8 @@ import { Canvas } from "@react-three/fiber";
 import { OrbitControls, useGLTF } from "@react-three/drei";
 import * as THREE from "three";
 import "../App.css";
-import BlockPreview from "./BlockPreview";
+import BlocksList from "./BlocksList";
+// import BlockPreview from "./BlockPreview";
 
 interface PlacedBlock {
   name: string;
@@ -11,30 +12,7 @@ interface PlacedBlock {
   position: [number, number, number];
 }
 
-// const BlockPreview: React.FC<{ model: THREE.Object3D; scale: number }> = ({
-//     model,
-//     scale,
-//   }) => {
-//     return (
-//       <Canvas
-//         style={{
-//           width: "100%",
-//           height: "100%",
-//         }}
-//         orthographic
-//         camera={{
-//           zoom: 100,
-//           position: [0, 7, 10],
-//         }}
-//       >
-//         <ambientLight intensity={0.5} />
-//         <primitive object={model.clone()} scale={[scale, scale, scale]} />
-//       </Canvas>
-//     );
-//   };
-  
-
-const LegoScene: React.FC = () => {
+const BlocksScene: React.FC = () => {
   const blockFiles = [
     { name: "8x2 Block", path: "/assets/8x2.glb" },
     { name: "4x2 Block", path: "/assets/4x2.glb" },
@@ -79,30 +57,16 @@ const LegoScene: React.FC = () => {
   };
 
   return (
-    <div className="lego-container">
-      <div className="lego-sidebar">
-        <h3>Blocks</h3>
-        <ul className="lego-block-list">
-          {allBlocks.map((block, index) => (
-            <li
-              key={index}
-              className={`lego-block-item ${
-                selectedBlock === block.name ? "selected" : ""
-              }`}
-              onClick={() => setSelectedBlock(block.name)}
-            >
-              <BlockPreview model={block.model} scale={25} />
-              {/* <span>{block.name}</span> */}
-            </li>
-          ))}
-        </ul>
-        <button onClick={handleAddBlock} disabled={!selectedBlock}>
-          Add Block to Canvas
-        </button>
-      </div>
+    <div className="blocks-container">
+      <BlocksList
+        allBlocks={allBlocks}
+        selectedBlock={selectedBlock}
+        setSelectedBlock={setSelectedBlock}
+        handleAddBlock={handleAddBlock}
+      />
 
       <Canvas
-        className="lego-canvas"
+        className="blocks-canvas"
         camera={{
           position: [0, 0.5, 2],
           fov: 45,
@@ -126,4 +90,4 @@ const LegoScene: React.FC = () => {
   );
 };
 
-export default LegoScene;
+export default BlocksScene;

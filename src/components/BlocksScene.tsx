@@ -13,10 +13,21 @@ interface PlacedBlock {
 }
 
 const BlocksScene: React.FC = () => {
+  // reading the glb block files created in blender
   const blockFiles = [
     { name: "8x2 Block", path: "/assets/8x2.glb" },
+    { name: "6x2 Block", path: "/assets/6x2.glb" },
     { name: "4x2 Block", path: "/assets/4x2.glb" },
+    { name: "3x2 Block", path: "/assets/3x2.glb" },
     { name: "2x2 Block", path: "/assets/2x2.glb" },
+
+    { name: "6x1 Block", path: "/assets/6x1.glb" },
+    { name: "4x1 Block", path: "/assets/4x1.glb" },
+    { name: "3x1 Block", path: "/assets/3x1.glb" },
+    { name: "2x1 Block", path: "/assets/2x1.glb" },
+    { name: "1x1 Block", path: "/assets/1x1.glb" },
+
+    { name: "2x1 Angled Block", path: "/assets/2x1_angled.glb" },
   ];
 
   const [selectedBlock, setSelectedBlock] = useState<string | null>(null);

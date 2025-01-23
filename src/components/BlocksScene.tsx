@@ -1,14 +1,14 @@
 import React, { useState, useMemo } from "react";
-import { Canvas } from "@react-three/fiber";
-import { OrbitControls, useGLTF } from "@react-three/drei";
+import { useGLTF } from "@react-three/drei";
 import * as THREE from "three";
 import "../App.css";
 import BlocksList from "./BlocksList";
-// import BlockPreview from "./BlockPreview";
+import BlockCanvas from "./BlockCanvas";
 
 interface PlacedBlock {
+  id: number;
   name: string;
-  scene: JSX.Element;
+  model: THREE.Object3D;
   position: [number, number, number];
 }
 
@@ -42,13 +42,15 @@ const BlocksScene: React.FC = () => {
     if (selectedBlock) {
       const block = allBlocks.find((b) => b.name === selectedBlock);
       if (block) {
-        const boundingBox = new THREE.Box3().setFromObject(block.scene.props.object);
+        const boundingBox = new THREE.Box3().setFromObject(block.model);
         const blockHeight = (boundingBox.max.y - boundingBox.min.y) * 4;
 
         setPlacedBlocks((prev) => [
           ...prev,
           {
-            ...block,
+            id: prev.length,
+            name: block.name,
+            model: block.model,
             position: [0, prev.reduce((acc) => acc + blockHeight, 0), 0],
           },
         ]);
@@ -65,27 +67,7 @@ const BlocksScene: React.FC = () => {
         handleAddBlock={handleAddBlock}
       />
 
-      <Canvas
-        className="blocks-canvas"
-        camera={{
-          position: [0, 0.5, 2],
-          fov: 45,
-        }}
-      >
-        <ambientLight intensity={0.5} />
-        <directionalLight position={[5, 5, 5]} intensity={1} />
-        <OrbitControls />
-
-
-        {placedBlocks.map((block, index) => (
-          <primitive
-            key={index}
-            object={block.scene.props.object}
-            position={block.position}
-            scale={[5, 5, 5]}
-          />
-        ))}
-      </Canvas>
+      <BlockCanvas placedBlocks={placedBlocks} />
     </div>
   );
 };

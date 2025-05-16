@@ -23,13 +23,11 @@ const BlocksList: React.FC<BlocksListProps> = ({
 
   const handleClick = (blockName: string) => {
     const now = Date.now();
-    // If within 300ms of the previous tap, consider it a double tap
     if (lastTap && now - lastTap < 300) {
       console.log("Double-tap detected:", blockName);
       setSelectedBlock(blockName);
       handleAddBlock();
     } else {
-      // Single tap: simply select the block
       setSelectedBlock(blockName);
     }
     setLastTap(now);

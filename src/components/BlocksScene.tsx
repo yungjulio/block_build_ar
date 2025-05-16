@@ -48,7 +48,7 @@ const BlocksScene: React.FC = () => {
       const block = allBlocks.find((b) => b.name === selectedBlock);
       if (block) {
         const boundingBox = new THREE.Box3().setFromObject(block.model);
-        const blockHeight = (boundingBox.max.y - boundingBox.min.y) * 4;
+        const blockHeight = (boundingBox.max.y - boundingBox.min.y) * 0.85;
 
         setPlacedBlocks((prev) => [
           ...prev,
@@ -56,7 +56,7 @@ const BlocksScene: React.FC = () => {
             id: prev.length,
             name: block.name,
             model: block.model,
-            position: [0, prev.reduce((acc) => acc + blockHeight, 0), 0],
+            position: [0, prev.reduce((acc) => acc + blockHeight, 0),0],
           },
         ]);
       }

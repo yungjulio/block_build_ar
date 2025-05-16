@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useState } from "react";
 import { Canvas } from "@react-three/fiber";
 import { OrbitControls } from "@react-three/drei";
 import * as THREE from "three";
@@ -16,12 +16,12 @@ interface BlockCanvasProps {
 }
 
 const BlockCanvas: React.FC<BlockCanvasProps> = ({ placedBlocks }) => {
-  const buttonRef = useRef<HTMLButtonElement | null>(null);
+  const [isARActive, setIsARActive] = useState(false);
 
   return (
     <Canvas
       className="lego-canvas"
-      camera={{ position: [0, 0.5, 2], fov: 45 }}
+      camera={{ position: [0, 0.1, 0.5], fov: 45 }}
       gl={{ antialias: true, alpha: true }}
       onCreated={({ gl }) => {
         gl.xr.enabled = true;
@@ -45,8 +45,10 @@ const BlockCanvas: React.FC<BlockCanvasProps> = ({ placedBlocks }) => {
         <primitive
           key={block.id}
           object={block.model}
-          position={block.position}
-          scale={[5, 5, 5]}
+          position={isARActive
+            ? [block.position[0], block.position[1], block.position[2] - 5] // shift forward for AR
+            : block.position}
+          scale={[1, 1, 1]}
         />
       ))}
     </Canvas>

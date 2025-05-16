@@ -6,6 +6,11 @@
   ],
   "compilerOptions": {
     // ...other options
-    "types": ["node"]
+    "types": ["node"],
+    "moduleResolution": "node",
+    "baseUrl": ".",
+    "paths": {
+      "three/examples/jsm/*": ["node_modules/three/examples/jsm/*"]
+    }
   }
 }

@@ -16,7 +16,7 @@ interface BlockCanvasProps {
 }
 
 const BlockCanvas: React.FC<BlockCanvasProps> = ({ placedBlocks }) => {
-  const [isARActive, setIsARActive] = useState(false);
+  const [isARActive] = useState(false);
 
   return (
     <Canvas
@@ -46,7 +46,7 @@ const BlockCanvas: React.FC<BlockCanvasProps> = ({ placedBlocks }) => {
           key={block.id}
           object={block.model}
           position={isARActive
-            ? [block.position[0], block.position[1], block.position[2] - 5] // shift forward for AR
+            ? [block.position[0], block.position[1], block.position[2] - 1] // shift forward for AR
             : block.position}
           scale={[1, 1, 1]}
         />

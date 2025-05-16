@@ -11,6 +11,7 @@ interface BlocksListProps {
   selectedBlock: string | null;
   setSelectedBlock: React.Dispatch<React.SetStateAction<string | null>>;
   handleAddBlock: () => void;
+  handleClearBlocks: () => void;
 }
 
 const BlocksList: React.FC<BlocksListProps> = ({
@@ -18,6 +19,7 @@ const BlocksList: React.FC<BlocksListProps> = ({
   selectedBlock,
   setSelectedBlock,
   handleAddBlock,
+  handleClearBlocks
 }) => {
   const [lastTap, setLastTap] = useState<number | null>(null);
 
@@ -50,8 +52,11 @@ const BlocksList: React.FC<BlocksListProps> = ({
         ))}
       </ul>
       <button onClick={handleAddBlock} disabled={!selectedBlock}>
-        Add Block to Canvas
+        +
       </button>
+      <button onClick={handleClearBlocks} style={{ marginTop: "10px" }}>
+        X
+    </button>
     </div>
   );
 };
